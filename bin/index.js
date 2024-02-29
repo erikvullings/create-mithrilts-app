@@ -24,53 +24,56 @@ function cloneRepo(foldername) {
   });
 }
 
-function replaceWordsInFiles(folderPath, dictionary) {
-  fs.readdir(folderPath, (err, files) => {
-    if (err) {
-      console.error("Error reading folder:", err);
-      return;
-    }
+async function replaceWordsInFiles(folderPath, dictionary) {
+  return new Promise((resolve) => {
+    fs.readdir(folderPath, (err, files) => {
+      if (err) {
+        console.error("Error reading folder:", err);
+        return;
+      }
 
-    files.forEach((file) => {
-      const filePath = path.join(folderPath, file);
-      fs.stat(filePath, (err, stats) => {
-        if (err) {
-          console.error("Error getting file stats:", err);
-          return;
-        }
-        if (
-          stats.isFile() &&
-          (file.endsWith(".ts") || file.endsWith(".json"))
-        ) {
-          fs.readFile(filePath, "utf8", (err, data) => {
-            if (err) {
-              console.error("Error reading file:", err);
-              return;
-            }
+      files.forEach((file) => {
+        const filePath = path.join(folderPath, file);
+        fs.stat(filePath, async (err, stats) => {
+          if (err) {
+            console.error("Error getting file stats:", err);
+            return;
+          }
+          if (
+            stats.isFile() &&
+            (file.endsWith(".ts") || file.endsWith(".json"))
+          ) {
+            fs.readFile(filePath, "utf8", (err, data) => {
+              if (err) {
+                console.error("Error reading file:", err);
+                return;
+              }
 
-            // Replace words in the file content using the dictionary
-            let replacedContent = data;
-            for (const [key, value] of dictionary.entries()) {
-              const regex = new RegExp("\\b" + key + "\\b", "g"); // word boundary
-              replacedContent = replacedContent.replace(regex, value);
-            }
+              // Replace words in the file content using the dictionary
+              let replacedContent = data;
+              for (const [key, value] of dictionary.entries()) {
+                const regex = new RegExp("\\b" + key + "\\b", "g"); // word boundary
+                replacedContent = replacedContent.replace(regex, value);
+              }
 
-            // Write the modified content back to the file
-            if (data !== replacedContent) {
-              fs.writeFile(filePath, replacedContent, "utf8", (err) => {
-                if (err) {
-                  console.error("Error writing file:", err);
-                } else {
-                  console.log(`Words replaced in file: ${filePath}`);
-                }
-              });
-            }
-          });
-        } else if (stats.isDirectory()) {
-          // Recursively process subfolders
-          replaceWordsInFiles(filePath, dictionary);
-        }
+              // Write the modified content back to the file
+              if (data !== replacedContent) {
+                fs.writeFile(filePath, replacedContent, "utf8", (err) => {
+                  if (err) {
+                    console.error("Error writing file:", err);
+                  } else {
+                    console.log(`Words replaced in file: ${filePath}`);
+                  }
+                });
+              }
+            });
+          } else if (stats.isDirectory()) {
+            // Recursively process subfolders
+            await replaceWordsInFiles(filePath, dictionary);
+          }
+        });
       });
+      resolve();
     });
   });
 }
@@ -118,7 +121,7 @@ async function main() {
     ["123456789", applicationPort],
   ]);
 
-  replaceWordsInFiles(projectName, dictionary);
+  await replaceWordsInFiles(projectName, dictionary);
   // Here you can write the logic to generate the Mithril app with the provided details
   // For demonstration purposes, let's just log a success message
   console.log("\nMithril app generated successfully!");
