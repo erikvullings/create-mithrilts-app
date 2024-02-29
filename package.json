@@ -1,0 +1,34 @@
+{
+  "name": "create-mithril-app",
+  "version": "1.0.0",
+  "description": "Create a mithril app, using TypeScript and Materialize-CSS.",
+  "main": "bin/index.js",
+  "scripts": {
+    "patch": "npm version patch --force -m \"Patch release\" && npm publish && git push --follow-tags",
+    "minor": "npm version minor --force -m \"Minor release\" && npm publish && git push --follow-tags",
+    "major": "npm version major --force -m \"Major release\" && npm publish && git push --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikvullings/create-mithril-app.git"
+  },
+  "keywords": [
+    "create",
+    "template",
+    "mithril",
+    "typescript"
+  ],
+  "bin": {
+    "create-mithril-app": "bin/index.js"
+  },
+  "author": "Erik Vullings <erik.vullings@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/erikvullings/create-mithril-app/issues"
+  },
+  "homepage": "https://github.com/erikvullings/create-mithril-app#readme",
+  "dependencies": {
+    "degit": "^2.8.4",
+    "readline": "^1.3.0"
+  }
+}
