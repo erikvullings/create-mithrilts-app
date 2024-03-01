@@ -1,6 +1,6 @@
 {
   "name": "create-mithrilts-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create a mithril app, using TypeScript and Materialize-CSS.",
   "main": "bin/index.js",
   "scripts": {
