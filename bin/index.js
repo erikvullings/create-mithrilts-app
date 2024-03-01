@@ -118,7 +118,7 @@ async function main() {
     ["mithril-app", applicationTitle.toLowerCase()],
     ["APPLICATION_DESCRIPTION", applicationDesc],
     ["erikvullings", applicationDesc],
-    ["123456789", applicationPort],
+    ["65533", applicationPort],
   ]);
 
   await replaceWordsInFiles(projectName, dictionary);
