@@ -7,5 +7,5 @@ It uses a [GitHub template](https://docs.github.com/en/repositories/creating-and
 ## Usage
 
 ```bash
-npx create-mithril-app
+npx create-mithrilts-app
 ```
