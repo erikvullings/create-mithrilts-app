@@ -104,7 +104,7 @@ async function main() {
   );
   const applicationShortTitle = await promptUser(
     "Enter application short title",
-    projectName
+    applicationTitle
   );
   const applicationDesc = await promptUser("Enter application desciption", "");
   const applicationPort = await promptUser("Enter webdev port", "1234");
@@ -119,8 +119,8 @@ async function main() {
   await cloneRepo(projectName);
 
   const dictionary = new Map([
-    ["MITHRIL-APP", applicationTitle],
     ["MITHRIL-APP-SHORT", applicationShortTitle],
+    ["MITHRIL-APP", applicationTitle],
     ["mithril-app", applicationTitle.toLowerCase()],
     ["APPLICATION_DESCRIPTION", applicationDesc],
     ["erikvullings", applicationDesc],
