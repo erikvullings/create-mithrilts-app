@@ -102,12 +102,17 @@ async function main() {
     "Enter application title",
     projectName
   );
+  const applicationShortTitle = await promptUser(
+    "Enter application short title",
+    projectName
+  );
   const applicationDesc = await promptUser("Enter application desciption", "");
   const applicationPort = await promptUser("Enter webdev port", "1234");
 
   console.log("\nGenerating Mithril app with the following details:");
   console.log(`Project Name: ${projectName}`);
   console.log(`Application Title: ${applicationTitle}`);
+  console.log(`Application Short Title: ${applicationShortTitle}`);
   console.log(`Application Port: ${applicationPort}`);
   console.log(`Application Description: ${applicationDesc}`);
 
@@ -115,6 +120,7 @@ async function main() {
 
   const dictionary = new Map([
     ["MITHRIL-APP", applicationTitle],
+    ["MITHRIL-APP-SHORT", applicationShortTitle],
     ["mithril-app", applicationTitle.toLowerCase()],
     ["APPLICATION_DESCRIPTION", applicationDesc],
     ["erikvullings", applicationDesc],
