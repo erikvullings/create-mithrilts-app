@@ -119,11 +119,11 @@ async function main() {
   await cloneRepo(projectName);
 
   const dictionary = new Map([
-    ["MITHRIL-APP-SHORT", applicationShortTitle],
-    ["MITHRIL-APP", applicationTitle],
-    ["mithril-app", applicationTitle.toLowerCase()],
-    ["APPLICATION_DESCRIPTION", applicationDesc],
-    ["erikvullings", applicationDesc],
+    ["MITHRIL-APP-SHORT", JSON.stringify(applicationShortTitle)],
+    ["MITHRIL-APP", JSON.stringify(applicationTitle)],
+    ["mithril-app", applicationTitle.replace(/['":;]/g, "_").toLowerCase()],
+    ["APPLICATION_DESCRIPTION", JSON.stringify(applicationDesc)],
+    ["erikvullings", JSON.stringify(applicationDesc)],
     ["65533", applicationPort],
   ]);
 
